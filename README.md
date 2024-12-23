@@ -1,8 +1,7 @@
 # How to compile:
 
 1. Check if you are on latest Ubuntu or Debian based Linux distribution
-> If yes, continue
-> If no, update
+> If yes, you can continue, if no, please update
 3. Install QT5
 > Run `sudo apt update`
 `sudo apt upgrade`
