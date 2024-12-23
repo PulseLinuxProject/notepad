@@ -5,6 +5,6 @@
 > If no, update
 3. Install QT5
 > Run `sudo apt update`
-> Run `sudo apt upgrade`
-> Run `sudo apt install qtcreator qtbase5-dev qt5-qmake qmake cmake gcc g++`
+`sudo apt upgrade`
+`sudo apt install qtcreator qtbase5-dev qt5-qmake qmake cmake gcc g++`
 4. Run `make`
