@@ -7,4 +7,4 @@
 > Run `sudo apt update`
 > Run `sudo apt upgrade`
 > Run `sudo apt install qtcreator qtbase5-dev qt5-qmake qmake cmake gcc g++`
-> 4. Run `make`
+4. Run `make`
