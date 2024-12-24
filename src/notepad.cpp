@@ -17,16 +17,13 @@
 #include <QVBoxLayout>
 
 Notepad::Notepad(QWidget *parent) : QMainWindow(parent), textEdit(new QTextEdit(this)), notesList(new QListWidget(this)) {
-    // Setup UI
     QFrame *mainFrame = new QFrame(this);
     QHBoxLayout *layout = new QHBoxLayout(mainFrame);
 
-    // Create a QToolBar for the actions
     QToolBar *toolbar = new QToolBar(this);
-    toolbar->setMovable(false); // Prevent toolbar from being moved
-    toolbar->setFixedHeight(50); // Make the toolbar longer (taller)
+    toolbar->setMovable(false);
+    toolbar->setFixedHeight(50);
 
-    // Add actions to the toolbar
     QAction *newAction = new QAction("New", this);
     connect(newAction, &QAction::triggered, this, &Notepad::newFile);
     toolbar->addAction(newAction);
@@ -34,7 +31,7 @@ Notepad::Notepad(QWidget *parent) : QMainWindow(parent), textEdit(new QTextEdit(
     QAction *openAction = new QAction("Open", this);
     connect(openAction, &QAction::triggered, this, &Notepad::openFile);
     toolbar->addAction(openAction);
-    
+
     QAction *saveAction = new QAction("Save", this);
     connect(saveAction, &QAction::triggered, this, &Notepad::saveFile);
     toolbar->addAction(saveAction);
@@ -42,44 +39,34 @@ Notepad::Notepad(QWidget *parent) : QMainWindow(parent), textEdit(new QTextEdit(
     QAction *saveAsAction = new QAction("Save As", this);
     connect(saveAsAction, &QAction::triggered, this, &Notepad::saveFileAs);
     toolbar->addAction(saveAsAction);
-    
+
     QAction *exitAction = new QAction("Exit", this);
     connect(exitAction, &QAction::triggered, this, &QWidget::close);
     toolbar->addAction(exitAction);
 
-    // Sidebar layout
-    notesList->setFixedWidth(380); // Make the sidebar longer
+    notesList->setFixedWidth(380);
 
-    // Create layout for sidebar and toolbar
     QVBoxLayout *sidebarLayout = new QVBoxLayout();
-    sidebarLayout->addWidget(toolbar); // Add toolbar at the top of sidebar
+    sidebarLayout->addWidget(toolbar);
     sidebarLayout->addWidget(notesList);
 
-    // Set the sidebar layout into the main layout
     layout->addLayout(sidebarLayout);
-
-    // Text editor area
     layout->addWidget(textEdit);
-    textEdit->setFixedWidth(500); // Make the sidebar longer
-    textEdit->setFixedHeight(500); // Make the toolbar longer (taller)
+    textEdit->setFixedWidth(500);
+    textEdit->setFixedHeight(500);
 
     mainFrame->setLayout(layout);
     setCentralWidget(mainFrame);
 
-    // Apply modern design styles
     setupModernDesign();
-
-    // Check if it's the first launch
     checkFirstLaunch();
 
-    // Set up the timer to refresh the notes list every 100ms
     QTimer *refreshTimer = new QTimer(this);
     connect(refreshTimer, &QTimer::timeout, this, &Notepad::updateNotesList);
-    refreshTimer->start(100); // 100 ms
+    refreshTimer->start(100);
 }
 
 Notepad::~Notepad() {
-    // Clean up resources
     delete textEdit;
     delete notesList;
 }
@@ -160,8 +147,7 @@ void Notepad::loadNotesFromDirectory(const QString &dirPath) {
         return;
     }
     QStringList files = notesDir.entryList(QStringList() << "*.txt" << "*.rtf", QDir::Files);
-
-    notesList->clear();  // Clear the existing items before reloading
+    notesList->clear();
 
     for (const QString &file : files) {
         notesList->addItem(file);
